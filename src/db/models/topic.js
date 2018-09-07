@@ -14,11 +14,7 @@ module.exports = (sequelize, DataTypes) => {
     Topic.hasMany(models.Rule, {
        foreignKey: "topicIdRule",
        as: "rules",
-  });
-    Topic.hasOne(models.Advertisement, {
-       foreignKey: "topicId",
-       as: "advertisements",
-     });
+    });
   };
   return Topic;
 };

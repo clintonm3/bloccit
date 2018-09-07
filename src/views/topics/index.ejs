@@ -7,6 +7,7 @@
     <main class="container">
       <% include ../static/partials/navbar.ejs %>
       <h1>Topics</h1>
+      <a href="/topics/new" class="btn btn-success">Create</a>
       <ul class="list-group">
         <% topics.forEach((topic) => { %>
           <li class="list-group-item">
