@@ -12,9 +12,7 @@ module.exports = (sequelize, DataTypes) => {
         as: "topicId",
      },
    },
-  },
-  {},
-);
+  }, {}, );
   Banner.associate = function(models) {
     Banner.belongsTo(models.Topic, {
        foreignKey: "topicId",

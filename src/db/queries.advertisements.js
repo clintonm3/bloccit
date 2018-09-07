@@ -1,36 +1,38 @@
-const Advertisement = require("./models").Advertisement
-module.exports = {
-  getAllAdvertisements(callback) {
+const Advertisement = require("./models").Advertisement;
+
+ module.exports = {
+
+   getAllAds(callback){
     return Advertisement.all()
-    .then((advertisements) => {
+     .then((advertisements) => {
       callback(null, advertisements);
     })
     .catch((err) => {
       callback(err);
-    });
+    })
   },
-  getAdvertisement(id, callback) {
+  addNewAd(newAd, callback){
+    return Advertisement.create({
+      title: newAd.title,
+      description: newAd.description
+    })
+    .then((advertisement) => {
+      callback(null, advertisement);
+    })
+    .catch((err) => {
+      callback(err);
+    })
+  },
+  getAd(id, callback){
     return Advertisement.findById(id)
     .then((advertisement) => {
       callback(null, advertisement);
     })
     .catch((err) => {
       callback(err);
-    });
-  },
-  addAdvertisement(newAdvertisement, callback) {
-    return Advertisement.create({
-      title: newAdvertisement.title,
-      description: newAdvertisement.description
     })
-    .then((advertisement) => {
-      callback(null, advertisement);
-    })
-    .catch((err) => {
-      callback(err);
-    });
   },
-  deleteAdvertisement(id, callback) {
+  deleteAd(id, callback){
     return Advertisement.destroy({
       where: {id}
     })
@@ -39,16 +41,16 @@ module.exports = {
     })
     .catch((err) => {
       callback(err);
-    });
+    })
   },
-  updateAdvertisement(id, updatedAdvertisement, callback) {
+  updateAd(id, updatedAd, callback){
     return Advertisement.findById(id)
     .then((advertisement) => {
-      if(!advertisement) {
+      if(!advertisement){
         return callback("Advertisement not found");
       }
-      advertisement.update(updatedAdvertisement, {
-        fields: Object.keys(updatedAdvertisement)
+      advertisement.update(updatedAd, {
+        fields: Object.keys(updatedAd)
       })
       .then(() => {
         callback(null, advertisement);

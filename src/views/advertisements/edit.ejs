@@ -7,7 +7,7 @@
     <% include ../static/partials/navbar.ejs %>
      <main class="container">
        <h1>Edit Advertisement</h1>
-       <form action="/advertisements/<%= advertisement.id %>/update" method="post">
+      <form action="/advertisements/<%= advertisement.id %>/update" method="post">
         <div class="form-group">
           <label for="title">Advertisement title</label>
           <input value="<%= advertisement.title %>" type="text" class="form-control" name="title" aria-describedby="titleHelp" placeholder="Enter Title">
@@ -20,6 +20,5 @@
       </form>
     </main>
      <% include ../static/partials/baseScripts.ejs %>
-
-  </body>
-</html>
+   </body>
+</html> 

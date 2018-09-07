@@ -6,6 +6,7 @@ module.exports = (sequelize, DataTypes) => {
   },
  {});
     Topic.associate = function(models) {
+
     Topic.hasMany(models.Banner, {
       foreignKey: "topicId",
       as: "banners",
@@ -13,6 +14,10 @@ module.exports = (sequelize, DataTypes) => {
     Topic.hasMany(models.Rule, {
        foreignKey: "topicIdRule",
        as: "rules",
+  });
+    Topic.hasOne(models.Advertisement, {
+       foreignKey: "topicId",
+       as: "advertisements",
      });
   };
   return Topic;

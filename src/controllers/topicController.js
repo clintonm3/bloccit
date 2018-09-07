@@ -1,6 +1,7 @@
 const topicQueries = require("../db/queries.topics.js");
 
 module.exports = {
+
   index(req, res, next){
     topicQueries.getAllTopics((err, topics) => {
         if(err){
@@ -10,9 +11,11 @@ module.exports = {
         }
       })
   },
+
   new(req, res, next){
       res.render("topics/new");
   },
+
   create(req, res, next){
        let newTopic = {
          title: req.body.title,
@@ -26,6 +29,7 @@ module.exports = {
          }
        });
      },
+
      show(req, res, next){
      topicQueries.getTopic(req.params.id, (err, topic) => {
        if(err || topic == null){
@@ -35,6 +39,7 @@ module.exports = {
        }
      });
    },
+
    destroy(req, res, next){
      topicQueries.deleteTopic(req.params.id, (err, topic) => {
        if(err){
@@ -44,6 +49,7 @@ module.exports = {
        }
      });
    },
+
    edit(req, res, next){
      topicQueries.getTopic(req.params.id, (err, topic) => {
        if(err || topic == null){
@@ -53,6 +59,7 @@ module.exports = {
        }
      });
    },
+
    update(req, res, next){
      topicQueries.updateTopic(req.params.id, req.body, (err, topic) => {
        if(err || topic == null){

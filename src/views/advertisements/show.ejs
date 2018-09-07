@@ -7,7 +7,7 @@
     <% include ../static/partials/navbar.ejs %>
      <main class="container">
       <h1><%= advertisement.title %></h1>
-         <a href="/advertisements/<%= advertisement.id %>/edit" class="btn btn-warning">Edit</a>
+        <a href="/advertisements/<%= advertisement.id %>/edit" class="btn btn-warning">Edit</a>
         <form style="display:initial" action="/advertisements/<%= advertisement.id %>/destroy" method="post">
           <button type="submit" class="btn btn-danger">Delete</button>
         </form>
@@ -15,4 +15,4 @@
     </main>
      <% include ../static/partials/baseScripts.ejs %>
    </body>
-</html>
+</html> 
