@@ -3,6 +3,7 @@ const server = require("../../src/server");
 const base = "http://localhost:3000/topics/";
 const sequelize = require("../../src/db/models/index").sequelize;
 const Topic = require("../../src/db/models").Topic;
+const Post = require("../../src/db/models").Post;
 
 describe("routes : topics", () => {
 
@@ -52,6 +53,7 @@ describe("routes : topics", () => {
    });
 
    describe("POST /topics/create", () => {
+     it("should create a new topic and redirect", (done) => {
       const options = {
         url: `${base}create`,
         form: {
@@ -59,10 +61,7 @@ describe("routes : topics", () => {
           description: "What's your favorite blink-182 song?"
         }
       };
-
-      it("should create a new topic and redirect", (done) => {
-        request.post(options,
-          (err, res, body) => {
+      request.post(options, (err, res, body) => {
             Topic.findOne({where: {title: "blink-182 songs"}})
             .then((topic) => {
               expect(res.statusCode).toBe(303);
@@ -76,7 +75,29 @@ describe("routes : topics", () => {
             });
           }
         );
-      });
+     });
+     it("should not create a new topic that fails validations", (done) => {
+          const options = {
+            url: `${base}create`,
+            form: {
+              title: "a",
+              description: "b"
+            }
+          };
+          request.post(options,
+            (err, res, body) => {
+              Topic.findOne({where: {title: "a"}})
+              .then((topic) => {
+                  expect(topic).toBeNull();
+                  done();
+              })
+              .catch((err) => {
+                console.log(err);
+                done();
+              });
+            }
+          );
+        });
     });
 
     describe("GET /topics/:id", () => {
