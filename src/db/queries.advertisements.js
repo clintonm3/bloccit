@@ -1,16 +1,16 @@
 const Advertisement = require("./models").Advertisement;
 
  module.exports = {
-
    getAllAds(callback){
     return Advertisement.all()
-     .then((advertisements) => {
-      callback(null, advertisements);
+      .then((advertisements) => {
+        callback(null, advertisements);
     })
     .catch((err) => {
       callback(err);
     })
   },
+
   addNewAd(newAd, callback){
     return Advertisement.create({
       title: newAd.title,
@@ -23,6 +23,7 @@ const Advertisement = require("./models").Advertisement;
       callback(err);
     })
   },
+
   getAd(id, callback){
     return Advertisement.findById(id)
     .then((advertisement) => {
@@ -32,6 +33,7 @@ const Advertisement = require("./models").Advertisement;
       callback(err);
     })
   },
+
   deleteAd(id, callback){
     return Advertisement.destroy({
       where: {id}
@@ -43,6 +45,7 @@ const Advertisement = require("./models").Advertisement;
       callback(err);
     })
   },
+
   updateAd(id, updatedAd, callback){
     return Advertisement.findById(id)
     .then((advertisement) => {

@@ -1,26 +1,32 @@
 const Topic = require("./models").Topic;
+const Post = require("./models").Post;
+const Flair = require("./models").Flair;
 
 module.exports = {
-
   getAllTopics(callback){
     return Topic.all()
-
-    .then((topics) => {
-      callback(null, topics);
+      .then((topics) => {
+        callback(null, topics);
     })
-    .catch((err) => {
-      callback(err);
-    })
+      .catch((err) => {
+        callback(err);
+    });
   },
 
   getTopic(id, callback){
-     return Topic.findById(id)
+     return Topic.findById(id, {
+       include: [{
+         model: Post,
+         as: "posts",
+      }],
+    })
      .then((topic) => {
        callback(null, topic);
      })
      .catch((err) => {
+       console.warn(err);
        callback(err);
-     })
+     });
    },
 
    addTopic(newTopic, callback){

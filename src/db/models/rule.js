@@ -12,8 +12,7 @@ module.exports = (sequelize, DataTypes) => {
         as: "topicIdRule",
       },
     },
-  },
-  {});
+  }, {});
   Rule.associate = function(models) {
     Rule.belongsToMany(models.Topic, {
       through: "topicIdRule"

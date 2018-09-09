@@ -1,13 +1,12 @@
 const topicQueries = require("../db/queries.topics.js");
 
 module.exports = {
-
   index(req, res, next){
     topicQueries.getAllTopics((err, topics) => {
-        if(err){
-          res.redirect(500, "static/index");
+          if(err){
+            res.redirect(500, "static/index");
         } else {
-          res.render("topics/index", {topics});
+            res.render("topics/index", { topics });
         }
       })
   },
@@ -23,29 +22,29 @@ module.exports = {
        };
        topicQueries.addTopic(newTopic, (err, topic) => {
          if(err){
-           res.redirect(500, "/topics/new");
+             res.redirect(500, "/topics/new");
          } else {
-           res.redirect(303, `/topics/${topic.id}`);
+             res.redirect(303, `/topics/${ topic.id }`);
          }
        });
      },
 
-     show(req, res, next){
-     topicQueries.getTopic(req.params.id, (err, topic) => {
-       if(err || topic == null){
-         res.redirect(404, "/");
-       } else {
-         res.render("topics/show", {topic});
-       }
+     show(req, res, next){       
+       topicQueries.getTopic(req.params.id, (err, topic) => {
+         if(err || topic == null){
+            res.redirect(404, "/");
+         } else {
+            res.render("topics/show", { topic });
+         }
      });
    },
 
    destroy(req, res, next){
      topicQueries.deleteTopic(req.params.id, (err, topic) => {
        if(err){
-         res.redirect(500, `/topics/${topic.id}`)
+           res.redirect(500, `/topics/${topic.id}`)
        } else {
-         res.redirect(303, "/topics")
+           res.redirect(303, "/topics")
        }
      });
    },
@@ -53,9 +52,9 @@ module.exports = {
    edit(req, res, next){
      topicQueries.getTopic(req.params.id, (err, topic) => {
        if(err || topic == null){
-         res.redirect(404, "/");
+           res.redirect(404, "/");
        } else {
-         res.render("topics/edit", {topic});
+           res.render("topics/edit", { topic });
        }
      });
    },
@@ -65,7 +64,7 @@ module.exports = {
        if(err || topic == null){
          res.redirect(404, `/topics/${req.params.id}/edit`);
        } else {
-         res.redirect(`/topics/${topic.id}`);
+         res.redirect(`/topics/${ topic.id }`);
        }
      });
    }

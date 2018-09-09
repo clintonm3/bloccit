@@ -10,9 +10,11 @@ module.exports = {
                 }
               })
     },
+
     new(req, res, next){
       res.render("advertisements/new");
     },
+
     create(req, res, next){
       let newAd = {
         title: req.body.title,
@@ -26,6 +28,7 @@ module.exports = {
         }
       });
     },
+
     show(req, res, next){
            adQueries.getAd(req.params.id, (err, advertisement) => {
              if(err || advertisement == null){
@@ -34,7 +37,8 @@ module.exports = {
                res.render("advertisements/show", {advertisement});
              }
            });
-         },
+    },
+
     destroy(req, res, next){
           adQueries.deleteAd(req.params.id, (err, advertisement) => {
             if(err){
@@ -43,7 +47,8 @@ module.exports = {
               res.redirect(303, "/advertisements")
             }
           });
-        },
+    },
+
     edit(req, res, next){
           adQueries.getAd(req.params.id, (err, advertisement) => {
             if(err || advertisement == null){
@@ -52,7 +57,8 @@ module.exports = {
               res.render("advertisements/edit", {advertisement});
             }
           });
-        },
+    },
+    
     update(req, res, next){
                adQueries.updateAd(req.params.id, req.body, (err, advertisement) => {
                  if(err || advertisement == null){

@@ -20,7 +20,7 @@ const Post = require("../../src/db/models").Post;
       });
     });
   });
-  
+
    describe("#create()", () => {
      it("should create a topic object with a title and description", (done) => {
        Topic.create({
